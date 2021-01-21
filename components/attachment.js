@@ -127,6 +127,7 @@ export class Attachment extends RequestProviderMixin(AsyncContainerMixin(BaseMix
 
 	async _unfurl(attachment) {
 		try {
+			this.resetAsyncState();
 			this._unfurlResult = await this._callUnfurl(attachment);
 			if (!this._unfurlResult) {
 				this._unfurlResult = {
