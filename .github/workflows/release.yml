@@ -22,4 +22,4 @@ jobs:
         uses: BrightspaceUI/actions/incremental-release@master
         with:
           DEFAULT_INCREMENT: minor
-          GITHUB_TOKEN: ${{ secrets.D2L_GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
