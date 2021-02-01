@@ -17,7 +17,11 @@ export class LinksInMessageProcessor {
 	_getTreewalker(message) {
 		const domData = (new window.DOMParser()).parseFromString(message, 'text/html');
 		const treeWalker = domData.createTreeWalker(domData.body, NodeFilter.SHOW_ALL,  {
-			acceptNode: ({nodeType, nodeName, textContent, src}) => {
+			acceptNode: (node) => {
+				let {nodeType, nodeName, textContent, src} = node;
+				if(nodeName === 'annotation' && node.hasAttribute('encoding') && node.getAttribute('encoding') === 'wiris') {
+					return NodeFilter.FILTER_REJECT;
+				}
 				if (nodeType === Node.TEXT_NODE) {
 					return new RegExp(LinksRegExpString, 'ig').test(textContent) ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_SKIP;
 				}
