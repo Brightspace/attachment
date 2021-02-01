@@ -18,8 +18,8 @@ export class LinksInMessageProcessor {
 		const domData = (new window.DOMParser()).parseFromString(message, 'text/html');
 		const treeWalker = domData.createTreeWalker(domData.body, NodeFilter.SHOW_ALL,  {
 			acceptNode: (node) => {
-				let {nodeType, nodeName, textContent, src} = node;
-				if(nodeName === 'annotation' && node.hasAttribute('encoding') && node.getAttribute('encoding') === 'wiris') {
+				const {nodeType, nodeName, textContent, src} = node;
+				if (nodeName === 'annotation' && node.hasAttribute('encoding') && node.getAttribute('encoding') === 'wiris') {
 					return NodeFilter.FILTER_REJECT;
 				}
 				if (nodeType === Node.TEXT_NODE) {
